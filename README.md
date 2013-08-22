@@ -7,5 +7,6 @@ The example is currently live at http://www.deanstreetcomedy.com/
 
 Implements Twitter Bootstrap via HTML5 Boilerplate.
 
-Written by Nick Kaye <hello@nickkaye.com>
+by Nick Kaye <hello@nickkaye.com>
+
 &copy; 2013 Outright Mental Inc.

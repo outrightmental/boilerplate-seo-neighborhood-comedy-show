@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Nick Kaye <hello@nickkaye.com>
+ * @copyright 2013 Outright Mental Inc.
+ */
 
 date_default_timezone_set('America/New_York');
 
