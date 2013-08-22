@@ -1,5 +1,5 @@
-Local Event SEO Boilerplate HTML5
-=================================
+Local Event SEO Boilerplate
+===========================
 
 Hosting a local event?  Here's an example of how to create pure gold Search Engine Optimization (S.E.O.) at one primary URL.
 
