@@ -1,25 +1,96 @@
 <?php
-/**
- * @author Nick Kaye <hello@nickkaye.com>
- * @copyright 2013 Outright Mental Inc.
- */
 
+include_once('php/Venue.php');
+include_once('php/Show.php');
+
+// Master
 date_default_timezone_set('America/New_York');
 
-$parent_name = "Dean Street Brooklyn";
-$name = "Dean Street Comedy";
-$title = "Comedy Night at Dean Street, Brooklyn, NY";
-$description = "Top NYC comedy talent at Brooklyn prices! A couple can enjoy a comedy show for 2 hours, drink and eat well for $50. After party at the bar!";
-$url = "http://www.deanstreetcomedy.com/";
-$dateslug = '20130814';
-$postercopy = "Dean Street Comedy. Wednesday, August 14.  9:00PM (Doors 8:45).  Your Host: Alissa Bissonnette.  Featuring Jermaine Fowler and Ben Kissel.  Make 'em laugh!  www.DeanStreetComedy.com. 755 Dean Street, Brooklyn, NY.";
-$ga_account = "UA-43069052-1";
-$twitter = "deanstreetbk";
+/**
+ * @var Venue $venue
+ */
+$venue = new Venue(array(
+    'name' => "Dean Street Brooklyn",
+    'addressOne' => "755 Dean Street",
+    'addressTwo' => "Brooklyn, NY",
+    'twitterHandle' => "deanstreetbk",
+    'urlFacebook' => "https://www.facebook.com/163065380378627",
+    'urlFoursquare' => "https://foursquare.com/v/dean-street/4d3933e376d1a35dfd3d058e",
+    'contentPageMain' => "We are here for the community presenting top New York City comedy talent, at Brooklyn prices! A couple can come and watch a comedy show for 2 hours, drink and eat well for $50. Join us for the after party at the bar!",
+));
+
+/**
+ * @var Show $show
+ */
+$show = new Show(array(
+    'venue' => $venue,
+    'url' => 'www.DeanStreetComedy.com',
+    'dateSlug' => '20131016',
+    'date' => 'October 16',
+    'dayOfWeek' => 'Wednesday',
+    'year' => '2013',
+    'time' => '9:00',
+    'timeDoors' => '8:45',
+    'host' => 'Seena Jon',
+    'headlinerOne' => 'Henry Zebrowski (Adult Swim\'s "Your Pretty Face is Going to Hell")',
+    'headlinerTwo' => 'Mark Normand(from Conan on TBS)',
+    'name' => "Dean Street Comedy #4",
+    'slogan' => "Make 'em laugh!",
+    'title' => "Comedy Night at Dean Street, Brooklyn, NY",
+    'description' => "Top NYC comedy talent at Brooklyn prices!A couple can enjoy a comedy show for 2 hours, drink and eat well for \$50. After party at the bar!",
+    'urlYouTube' => "http://www.youtube.com/deanstreetcomedy",
+    'urlFacebook' => "https://www.facebook.com/events/158610091011639",
+    'urlPoster' => "http://www.DeanStreetComedy.com/img/poster-20131016.jpg",
+));
+
+/**
+ * @var Show[] $pastShows
+ */
+$pastShows = array(
+    'show_3' => new Show(array(
+        'venue' => $venue,
+        'url' => 'www.DeanStreetComedy.com',
+        'dateSlug' => '20130918',
+        'date' => 'September 18',
+        'dayOfWeek' => 'Wednesday',
+        'year' => '2013',
+        'time' => '9:00',
+        'timeDoors' => '8:45',
+        'host' => 'Ben Kissel',
+        'headlinerOne' => 'Joe Machi (seen on Late Night with Jimmy Fallon)',
+        'headlinerTwo' => 'Kevin Barnett (seen in Sleep Walk with Me")',
+        'name' => "Dean Street Comedy #3",
+        'slogan' => "Make 'em laugh!",
+        'title' => "Comedy Night at Dean Street, Brooklyn, NY",
+        'description' => "Top NYC comedy talent at Brooklyn prices! A couple can enjoy a comedy show for 2 hours, drink and eat well for $50. After party at the bar!",
+        'urlYouTube' => "http://www.youtube.com/deanstreetcomedy",
+        'urlFacebook' => "https://www.facebook.com/events/158610091011639",
+        'urlPoster' => "http://www.DeanStreetComedy.com/img/poster-20130918.jpg",
+    )),
+    'show_2' => new Show(array(
+        'venue' => $venue,
+        'url' => 'www.DeanStreetComedy.com',
+        'date' => 'August 14',
+        'dayOfWeek' => 'Wednesday',
+        'year' => '2013',
+        'time' => '9:00',
+        'timeDoors' => '8:45',
+        'host' => 'Alissa Bissonnette',
+        'headlinerOne' => 'Jermaine Fowler',
+        'headlinerTwo' => 'Ben Kissel',
+        'name' => "Dean Street Comedy #2",
+        'slogan' => "Make 'em laugh!",
+        'title' => "Comedy Night at Dean Street, Brooklyn, NY",
+        'description' => "Top NYC comedy talent at Brooklyn prices! A couple can enjoy a comedy show for 2 hours, drink and eat well for $50. After party at the bar!",
+        'urlYouTube' => "http://www.youtube.com/deanstreetcomedy",
+        'urlFacebook' => "https://www.facebook.com/events/158610091011639",
+        'urlPoster' => "http://www.DeanStreetComedy.com/img/poster-20130814.jpg",
+    ))
+);
+
+// Technical
 $gplus_publisher = "https://plus.google.com/113786691084626528718/posts";
-$url_facebook = "https://www.facebook.com/163065380378627";
-$url_youtube = "http://www.youtube.com/deanstreetcomedy";
-$url_twitter = "http://www.twitter.com/$twitter/";
-$url_foursquare = "https://foursquare.com/v/dean-street/4d3933e376d1a35dfd3d058e";
+$ga_account = "UA-43069052-1";
 
 ?><!DOCTYPE html>
 <!--[if lt IE 7]>
@@ -33,26 +104,26 @@ $url_foursquare = "https://foursquare.com/v/dean-street/4d3933e376d1a35dfd3d058e
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title><?php echo $title; ?></title>
-    <meta name="description" content="<?php echo $description; ?>"/>
-    <link rel="canonical" href="<?php echo $url; ?>"/>
+    <title><?php echo $show->title; ?></title>
+    <meta name="description" content="<?php echo $show->description; ?>"/>
+    <link rel="canonical" href="<?php echo $show->url; ?>"/>
     <link rel="publisher" href="<?php echo $gplus_publisher; ?>"/>
     <meta property='og:locale' content='en_US'/>
     <meta property='og:type' content='article'/>
-    <meta property='og:title' content="<?php echo $title; ?>"/>
-    <meta property='og:description' content='<?php echo $description; ?>'/>
-    <meta property='og:url' content='<?php echo $url; ?>'/>
-    <meta property='og:site_name' content='<?php echo $name; ?>'/>
-    <meta property='article:author' content='<?php echo $url_facebook; ?>'/>
-    <meta property='article:publisher' content='<?php echo $url_facebook; ?>'/>
+    <meta property='og:title' content="<?php echo $show->title; ?>"/>
+    <meta property='og:description' content='<?php echo $show->description; ?>'/>
+    <meta property='og:url' content='<?php echo $show->url; ?>'/>
+    <meta property='og:site_name' content='<?php echo $show->name; ?>'/>
+    <meta property='article:author' content='<?php echo $show->venue->urlFacebook; ?>'/>
+    <meta property='article:publisher' content='<?php echo $show->venue->urlFacebook; ?>'/>
     <meta property='fb:admins' content='518634848'/>
-    <meta property='og:image' content="<?php echo $url; ?>img/poster-<?php echo $dateslug; ?>.jpg"/>
+    <meta property='og:image' content="<?php echo $show->urlPoster; ?>"/>
     <meta name="twitter:card" content="summary"/>
-    <meta name="twitter:site" content="@<?php echo $twitter; ?>"/>
-    <meta name="twitter:domain" content="<?php echo $parent_name; ?>"/>
-    <meta name="twitter:creator" content="@<?php echo $url_twitter; ?>"/>
+    <meta name="twitter:site" content="@<?php echo $show->venue->twitterHandle; ?>"/>
+    <meta name="twitter:domain" content="<?php echo $show->venue->name; ?>"/>
+    <meta name="twitter:creator" content="@<?php echo $show->venue->urlTwitter(); ?>"/>
     <meta name="twitter:image:src"
-          content="<?php echo $url; ?>img/poster-<?php echo $dateslug; ?>.jpg"/>
+          content="<?php echo $show->urlPoster; ?>"/>
 
 
     <meta name="viewport" content="width=device-width">
@@ -62,7 +133,7 @@ $url_foursquare = "https://foursquare.com/v/dean-street/4d3933e376d1a35dfd3d058e
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         body {
-            padding-top: 60px;
+            padding-top: 40px;
             padding-bottom: 40px;
         }
     </style>
@@ -81,6 +152,8 @@ $url_foursquare = "https://foursquare.com/v/dean-street/4d3933e376d1a35dfd3d058e
 
 <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
 
+<?php /*
+// TODO: Launch Video here
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
@@ -90,28 +163,30 @@ $url_foursquare = "https://foursquare.com/v/dean-street/4d3933e376d1a35dfd3d058e
     </div>
 </div>
 </div>
+*/
+?>
 
 <div class="container">
 
     <!-- Example row of columns -->
     <div class="row">
         <div class="span8">
-            <a href="http://www.eventbrite.com/event/7706515395"><img src='img/poster-<?php echo $dateslug; ?>.jpg'
-                                                                      alt="<?php echo $postercopy; ?>"/></a>
+            <a href="<?php echo $show->urlPosterLinkTo(); ?>" target="_blank"><img src='<?php echo $show->urlPoster; ?>'
+                                                                                 alt="<?php echo $show->content(); ?>"/></a>
         </div>
         <div class="span4">
-            <h1>Dean Street Comedy</h1>
+            <h1><?php echo $show->name ?></h1>
 
-            <p class="event-info">Wednesday, August 14<br/>9:00PM (Doors 8:45)</p>
+            <p class="event-info"><?php echo $show->dayOfWeek; ?>, <?php echo $show->date; ?>
+                <br/><?php echo $show->time; ?>PM (Doors <?php echo $show->timeDoors; ?>)</p>
 
-            <p class="event-info">755 Dean Street<br/>Brooklyn, NY.</p>
+            <p class="event-info"><?php echo $show->venue->addressOne; ?><br/><?php echo $show->venue->addressOne; ?></p>
 
-            <p>We are here for the community presenting top New York City comedy talent, at Brooklyn prices! A couple
-                can come and watch a comedy show for 2 hours, drink and eat well for $50. Join us for the after party at
-                the bar!</p>
+            <p><?php echo $show->venue->contentPageMain; ?></p>
 
             <p class='social'>
-                <a class="webicon youtube large" href="<?php echo $url_youtube; ?>" target="_blank">YouTube</a>
+                <a class="webicon facebook large" href="<?php echo $show->urlFacebook; ?>" target="_blank">Facebook</a>
+                <!--                <a class="webicon youtube large" href="<?php echo $show->urlYoutube; ?>" target="_blank">YouTube</a>	-->
             </p>
 
             <h2>the Venue</h2>
@@ -124,9 +199,9 @@ $url_foursquare = "https://foursquare.com/v/dean-street/4d3933e376d1a35dfd3d058e
                     class="brooklyn">Brooklyn, NY</span></p>
 
             <p class='social'>
-                <a class="webicon facebook large" href="<?php echo $url_facebook; ?>" target="_blank">Facebook</a>
-                <a class="webicon twitter large" href="<?php echo $url_twitter; ?>" target="_blank">Twitter</a>
-                <a class="webicon foursquare large" href="<?php echo $url_foursquare; ?>" target="_blank">Foursquare</a>
+                <a class="webicon facebook large" href="<?php echo $show->venue->urlFacebook; ?>" target="_blank">Facebook</a>
+                <a class="webicon twitter large" href="<?php echo $show->venue->urlTwitter(); ?>" target="_blank">Twitter</a>
+                <a class="webicon foursquare large" href="<?php echo $show->venue->urlFoursquare; ?>" target="_blank">Foursquare</a>
             </p>
 
             <p>Friends since middle school, Rob Gelardi and John Longo co-own this neighborhood bar/restaurant and
@@ -141,22 +216,15 @@ $url_foursquare = "https://foursquare.com/v/dean-street/4d3933e376d1a35dfd3d058e
 
             <h3>Host</h3>
 
-            <p>Alissa Bissonnette
-
-            <p>
+            <p><?php echo $show->host; ?></p>
 
             <h3>Headlining</h3>
 
-            <p>Jermaine Fowler</p>
+            <p><?php echo $show->headlinerOne; ?></p>
 
             <h3>Featuring</h3>
 
-<p>Dylan Shelton</p>
-<p>Ben Kissel</p>
-<p>Henry Zebrowski</p>
-<p>Skinny B**** Jesus Meeting</p>
-<p>Chris Griggs</p>
-<p>Amber Nelson</p>			
+            <p><?php echo $show->headlinerTwo; ?></p>
         </div>
     </div>
 
@@ -168,6 +236,36 @@ $url_foursquare = "https://foursquare.com/v/dean-street/4d3933e376d1a35dfd3d058e
 
 </div>
 <!-- /container -->
+
+<div class="container">&nbsp;</div>
+
+<div class="container">
+
+    <div class="row">
+
+        <?php foreach ($pastShows as $pastShow): ?>
+            <div class="span6">
+                <h1>Past Show: <?php echo $pastShow->name; ?></h1>
+
+                <p class="event-info"><?php echo $pastShow->datePretty(); ?></p>
+
+                <h3>Host</h3>
+
+                <p><?php echo $pastShow->host; ?></p>
+
+                <h3>Headlining</h3>
+
+                <p><?php echo $pastShow->headlinerOne; ?></p>
+
+                <h3>Featuring</h3>
+
+                <p><?php echo $pastShow->headlinerTwo; ?></p>
+            </div>
+        <?php endforeach; ?>
+
+    </div>
+
+</div>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
