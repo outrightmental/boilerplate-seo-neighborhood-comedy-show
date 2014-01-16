@@ -40,7 +40,7 @@ class Venue
     public function setAttributes($data)
     {
         foreach ($data as $key => $value)
-            if (property_exists('Show', $key))
+            if (property_exists($this, $key))
                 $this->$key = $value;
     }
 
